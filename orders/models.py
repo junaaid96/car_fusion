@@ -13,4 +13,4 @@ class Order(models.Model):
     status = models.CharField(max_length=100, default='Available')
 
     def __str__(self):
-        return f"Order {self.id} by {self.customer.username}"
+        return f"{self.car} by {self.customer.username}"

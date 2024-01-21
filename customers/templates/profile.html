@@ -7,6 +7,28 @@
 </div>
 <div class="mt-5">
     <h4>Your All Order</h4>
-    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{order.id}}</td>
+                <td><img src="{{order.car.image.url}}" alt="{{order.car}}" width="100px"></td>
+                <td>{{order.quantity}}</td>
+                <td>{{order.status}}</td>
+                <td>{{order.total_price}}</td>
+                <td>{{order.order_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
 </div>
 {% endblock %}

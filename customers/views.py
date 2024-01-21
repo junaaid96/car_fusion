@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from orders.models import Order
 
 
 def sign_up(request):
@@ -18,6 +19,7 @@ def sign_up(request):
     else:
         form = forms.SignUpForm()
     return render(request, 'sign_up.html', {'form': form, 'type': 'Sign Up'})
+
 
 class UserLoginView(LoginView):
     template_name = 'sign_up.html'
@@ -33,15 +35,19 @@ class UserLoginView(LoginView):
         context = super().get_context_data(**kwargs)
         context['type'] = 'Login'
         return context
-    
+
+
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    orders = Order.objects.filter(customer=request.user)
+    return render(request, 'profile.html', {'orders': orders})
+
 
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        profile_form = forms.ChangeUserDataForm(request.POST, instance=request.user)
+        profile_form = forms.ChangeUserDataForm(
+            request.POST, instance=request.user)
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, 'Profile updated successfully!')
@@ -51,6 +57,7 @@ def edit_profile(request):
     else:
         profile_form = forms.ChangeUserDataForm(instance=request.user)
     return render(request, 'edit_profile.html', {'form': profile_form})
+
 
 @method_decorator(login_required, name='dispatch')
 class UserPasswordChangeView(PasswordChangeView):
