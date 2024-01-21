@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-    Car Details!
-    {{car.model_name}}
-{% endblock  %}
+<h1>Car Details</h1>
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <img src="{{car.image.url}}" alt="{{car.model_name}}" class="img-fluid">
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <h4>Brand: {{car.brand}}</h3>
+            <h3>Model: {{car.model_name}}</h3>
+            <p>Color: {{car.color}}</p>
+            <p>Price: ${{car.price}}</p>
+            <p>Year: {{car.manufacturing_year}}</p>
+            <p>Quantity: {{car.quantity}}</p>
+
+            {% if user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'place_order' %}">Buy Now</a>
+            {% endif %}
+    </div>
+</div>
+
+{% endblock %}

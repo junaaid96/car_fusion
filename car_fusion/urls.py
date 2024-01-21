@@ -8,9 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
     path('cars/', include('cars.urls')),
-    # path('brands/', include('brands.urls')),
     path('customers/', include('customers.urls')),
-    # path('orders/', include('orders.urls')),
+    path('orders/', include('orders.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

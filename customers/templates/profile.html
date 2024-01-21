@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Profile</h1>
+<h1 class="mb-5">Profile</h1>
+<div class="d-flex flex-column gap-3">
+    <h4>Hello, {{user.username}}</h4>
+    <a class="btn btn-warning" href="{% url 'edit_profile' %}">Edit Profile</a>
+</div>
+<div class="mt-5">
+    <h4>Your All Order</h4>
+    
+</div>
 {% endblock %}
