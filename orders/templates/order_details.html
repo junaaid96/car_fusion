@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-success">Order Success!</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Car: {{order.car}}</h5>
+        <p class="card-text">Color: {{order.car.color}}</p>
+        <p class="card-text">Quantity: {{order.quantity}}</p>
+        <p class="card-text">Price: {{order.total_price}}</p>
+        <p class="card-text">Status: {{order.status}} to {{order.customer}}</p>
+        <p class="card-text">
+            <small class="text-body-secondary">Order Date: {{order.order_date}}</small>
+        </p>
+    </div>
+</div>
+{% endblock %}

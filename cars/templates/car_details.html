@@ -14,7 +14,11 @@
             <p>Quantity: {{car.quantity}}</p>
 
             {% if user.is_authenticated %}
-            <a class="btn btn-primary" href="{% url 'place_order' %}">Buy Now</a>
+            <form action="{% url 'place_order' car.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary" value="Buy Now">
+            </form>
+            
             {% endif %}
     </div>
 </div>
