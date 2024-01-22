@@ -1,25 +1,44 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
 
 <!-- style -->
 <style>
     .card {
         width: 18rem;
     }
+
     .card-img-top {
         height: 150px;
         object-fit: cover;
     }
 </style>
+<!-- header section -->
+<div class="row mt-5 d-flex gap-2 align-items-center justify-content-between">
+    <div class="col-lg-5 col-md-12">
+        <p>
+            CarFusion is more than just a website. It’s a community of car enthusiasts who share their passion, knowledge, and experience with each other. You can browse thousands of listings from verified sellers, compare prices and features, read reviews and ratings, and find the perfect car for you. You can also list your car for free, reach millions of potential buyers, and get instant offers from CarFusion’s network of dealers and partners.
+        </p>
+    </div>
+    <div class="col-lg-5 col-md-12">
+        <img src="{% static 'header.webp' %}" alt="header" class="h-100" width="400px"/>
+    </div>
+</div>
 
-<p>Total Available Cars: {{cars | length}}</p>
+<!-- brand name for filter -->
+<div class="mt-5 d-flex align-items-center justify-content-around">
+    <a class="btn btn-warning" href="{% url 'home' %}">All</a>
+    {% for brand in brands %}
+        <a href="{% url 'filter_by_brand' brand.id %}" class="btn btn-warning">{{brand.name}}</a>
+    {% endfor %}
+</div>  
+
+<!-- car list -->
+<p class="bg-info-subtle d-inline-block p-2 my-5">Total Available Cars: {{cars | length}}</p>
 <div class="d-flex flex-wrap gap-3">
     {% for car in cars %}
     <div class="card text-center">
-        <img
-            src="{{car.image.url}}"
-            class="card-img-top"
-            alt="{{car.model_name}}"
-        />
+        <img src="{{car.image.url}}" class="card-img-top" alt="{{car.model_name}}" />
         <div class="card-body">
             <h4>{{car.brand}}</h4>
             <h3 class="card-title">Model: {{car.model_name}}</h3>
@@ -27,9 +46,7 @@
             <p>Price: ${{car.price}}</p>
         </div>
         <div class="card-footer border-0">
-            <a href="{% url 'car_details' car.id %}" class="btn btn-primary"
-                >View Details</a
-            >
+            <a href="{% url 'car_details' car.id %}" class="btn btn-primary">View Details</a>
         </div>
     </div>
     {% endfor %}
