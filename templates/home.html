@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
@@ -17,11 +17,15 @@
 <div class="row mt-5 d-flex gap-2 align-items-center justify-content-between">
     <div class="col-lg-5 col-md-12">
         <p>
-            CarFusion is more than just a website. It’s a community of car enthusiasts who share their passion, knowledge, and experience with each other. You can browse thousands of listings from verified sellers, compare prices and features, read reviews and ratings, and find the perfect car for you. You can also list your car for free, reach millions of potential buyers, and get instant offers from CarFusion’s network of dealers and partners.
+            CarFusion is more than just a website. It’s a community of car enthusiasts who share their passion,
+            knowledge, and experience with each other. You can browse thousands of listings from verified sellers,
+            compare prices and features, read reviews and ratings, and find the perfect car for you. You can also list
+            your car for free, reach millions of potential buyers, and get instant offers from CarFusion’s network of
+            dealers and partners.
         </p>
     </div>
     <div class="col-lg-5 col-md-12">
-        <img src="{% static 'header.webp' %}" alt="header" class="h-100" width="400px"/>
+        <img src="{% static 'header.webp' %}" alt="header" class="h-100" width="400px" />
     </div>
 </div>
 
@@ -29,9 +33,9 @@
 <div class="mt-5 d-flex align-items-center justify-content-around">
     <a class="btn btn-warning" href="{% url 'home' %}">All</a>
     {% for brand in brands %}
-        <a href="{% url 'filter_by_brand' brand.id %}" class="btn btn-warning">{{brand.name}}</a>
+    <a href="{% url 'filter_by_brand' brand.id %}" class="btn btn-warning">{{brand.name}}</a>
     {% endfor %}
-</div>  
+</div>
 
 <!-- car list -->
 <p class="bg-info-subtle d-inline-block p-2 my-5">Total Available Cars: {{cars | length}}</p>

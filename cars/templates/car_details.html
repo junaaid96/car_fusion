@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
+
 <h1>Car Details</h1>
 <div class="row">
     <div class="col-lg-6 col-md-12">
@@ -18,9 +20,39 @@
                 {% csrf_token %}
                 <input type="submit" class="btn btn-primary" value="Buy Now">
             </form>
-            
+
             {% endif %}
     </div>
+</div>
+<div>
+    <div class="card m-2">
+        <h5 class="p-3">Total Reviews : {{reviews | length}}</h5>
+        {% for review in reviews %}
+        <div class="card-body border m-2 d-flex justify-content-between">
+            <div>
+                <p><b>{{review.name}}({{review.email}})</b></p>
+                <p>Rating: {{review.rating}}/10</p>
+                <p>{{review.comment}}</p>
+            </div>
+            <div>
+                <p>{{review.created_at}}</p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="card m-2">
+        <div class="card-body">
+            <form method="post" novalidate>
+                <h4>Reviews</h4>
+                {% csrf_token %}
+                {{review_form | crispy}}
+
+                <button class="btn btn-warning">Submit</button>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
